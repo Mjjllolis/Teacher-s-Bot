@@ -52,8 +52,26 @@ async def on_message(message):
     quote = get_quote()
     await message.channel.send(quote)
 
+    options = starterEnc
+    if "encouragements" in db.keys():
+      options = options + db["encouragements"]
+
   if any(word in msg for word in sadWords):
-    await message.channel.send(random.choice(starterEnc))
+    await message.channel.send(random.choice(options))
+
+  if msg.startswith("$new"):
+    encMsg = msg.split("$new ",1)[1]
+    updateEnc(encMsg)
+    await message.channel.send("New Encouragement Added.")
+
+  if msg.startswith("$delete"):
+    encouragements = []
+    if "encouragements" in db.keys():
+      index = int(msg.split("$delete", 1)[1])
+      deleteEnc(index)
+      encouragements = db["encouragements"]
+    await message.channel.send(encouragements)
+
 
 
 #Run the bot
