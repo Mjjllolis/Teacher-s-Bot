@@ -48,7 +48,7 @@ async def on_message(message):
 
   msg = message.content
 
-  if msg.startswith('$q'):
+  if msg.startswith('$quote'):
     quote = get_quote()
     await message.channel.send(quote)
 
@@ -72,11 +72,5 @@ async def on_message(message):
       encouragements = db["encouragements"]
     await message.channel.send(encouragements)
 
-
-
-#Run the bot
 client.run(my_secret)
 
-
-
-#Possible improvement, Get it to only say mean quotes to Z, everyone else gets nice quotes
